@@ -20,6 +20,7 @@ from views.auth import *
 
 
 urlpatterns = [
+    #path('')
     path('admin/', admin.site.urls),
     path('register/', register.RegisterView.as_view(), name='register'),
     path('login/', login.LoginView.as_view(), name='login'),
