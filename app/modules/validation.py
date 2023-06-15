@@ -1,4 +1,6 @@
-from ..config import Database
+from sqlalchemy.orm import Session
+
+from ..models.user import crud
 
 import re
 
@@ -13,14 +15,14 @@ def validate_name(name: str):
         raise ValueError("Invalid character(s) found!")
     
 
-def validate_email(email: str, db: Database):
+def validate_email(email: str, db: Session):
     assert email is str, "Non-string value found!"
-    assert db is Database, "Not a database!"
+    assert db is Session, "Not a database!"
     
     if re.search(EMAIL_REGEX, email):
         raise ValueError("Not an email!")
 
-    if db.get_user_from_email(email):
+    if crud.get_user_by_email(db, email) is not None:
         raise ValueError("Email has already been used!")
     
 
@@ -51,6 +53,3 @@ def validate_password(password: str):
         raise ValueError(msg.format("special"))
     if not digit:
         raise ValueError(msg.format("digit"))
-    
-
-def 

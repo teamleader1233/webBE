@@ -11,6 +11,10 @@ class UserCreate(UserBase):
     password: str
 
 
+class UserLogin(UserBase):
+    password: str
+
+
 class User(UserBase):
     uuid: str
     is_active: bool = True
@@ -18,3 +22,7 @@ class User(UserBase):
 
     class Config:
         orm_mode = True
+
+
+class UserInDB(User):
+    hashed_password: str
