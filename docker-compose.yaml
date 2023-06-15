@@ -8,16 +8,15 @@ services:
       - "8008:8000"
     environment:
       - DATABASE_URL=postgresql://SVN_Admin:SVN_logistics_2022!@db:5000/SVN
-      - DOMAIN=localhost
     depends_on:
       - db
   db:
     image: postgres:14.8
     volumes:
-      - ./data:/var/lib/postgresql/data
+      - ./postgres_data:/var/lib/postgresql/data
     environment:
       - POSTGRES_DB=SVN
       - POSTGRES_USER=SVN_Admin
       - POSTGRES_PASSWORD=SVN_logistics_2022!
 volumes:
-  data:
+  postgres_data:
