@@ -2,11 +2,12 @@ from fastapi import FastAPI, Depends
 
 from .routers.auth import register, login
 from .dependencies import get_query_token, get_token_header
-from .models.db import db, engine
+from .models.db import engine
 from .models.user import models as userModel
 
 
-app = FastAPI(dependencies=[Depends(get_query_token)])
+app = FastAPI()
+#dependencies=[Depends(get_query_token)]
 
 
 app.include_router(
