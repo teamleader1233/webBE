@@ -2,8 +2,6 @@ from fastapi import FastAPI, Depends
 
 from .routers.auth import register, login
 from .dependencies import get_query_token, get_token_header
-from .models.db import engine
-from .models.user import models as userModel
 
 
 app = FastAPI()
@@ -12,17 +10,12 @@ app = FastAPI()
 
 app.include_router(
     register.router,
-    prefix='/auth'
+    prefix='/api'
 )
 app.include_router(
     login.router,
-    prefix='/auth'
+    prefix='/api'
 )
-
-
-# @app.on_event("startup")
-# async def startup():
-#     userModel.User.Base.metadata.create_all(bind=engine)
 
 
 @app.get("/")

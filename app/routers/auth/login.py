@@ -24,7 +24,9 @@ import re
 userModel.Base.metadata.create_all(bind=engine)
 
 
-router = APIRouter()
+router = APIRouter(
+    prefix='/auth'
+)
 
 
 @router.post("/login", response_model=tokenSchema.Token, status_code=201)
