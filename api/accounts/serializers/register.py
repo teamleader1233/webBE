@@ -1,17 +1,19 @@
 from rest_framework import serializers
 from rest_framework.response import Response
 from rest_framework.validators import UniqueValidator
-from rest_framework.exceptions import NotAuthenticated
 
-from django.contrib.auth.models import User
 from django.contrib.auth import models
 from django.contrib.auth.password_validation import validate_password
 
+from uuid import uuid4
 
-class RegisterSerializer(serializers.ModelSerializer):
+from ..models.user import Customer
+
+
+class RegisterCustomerSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(
         required=True,
-        validators=[UniqueValidator(queryset=User.objects.all())]
+        validators=[UniqueValidator(queryset=Customer.objects.all())]
     )
     password = serializers.CharField(
         write_only=True, 
@@ -20,7 +22,7 @@ class RegisterSerializer(serializers.ModelSerializer):
     )
 
     class Meta:
-        model = User
+        model = Customer
         fields = ('first_name', 'last_name', 'email', 'password')
         extra_kwargs = {
             'first_name': {'required': True},
@@ -28,7 +30,8 @@ class RegisterSerializer(serializers.ModelSerializer):
         }
     
     def create(self, validated_data):
-        user = User.objects.create(
+        user = Customer.objects.create(
+            uuid = uuid4(),
             email=validated_data['email'],
             first_name=validated_data['first_name'],
             last_name=validated_data['last_name']
