@@ -1,19 +1,17 @@
 from rest_framework import serializers
-from rest_framework.response import Response
 from rest_framework.validators import UniqueValidator
 
-from django.contrib.auth import models
 from django.contrib.auth.password_validation import validate_password
 
 from uuid import uuid4
 
-from ..models.user import Customer
+from ..models.user import SvnUser
 
 
-class RegisterCustomerSerializer(serializers.ModelSerializer):
+class RegisterUserSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(
         required=True,
-        validators=[UniqueValidator(queryset=Customer.objects.all())]
+        validators=[UniqueValidator(queryset=SvnUser.objects.all())]
     )
     password = serializers.CharField(
         write_only=True, 
@@ -22,7 +20,7 @@ class RegisterCustomerSerializer(serializers.ModelSerializer):
     )
 
     class Meta:
-        model = Customer
+        model = SvnUser
         fields = ('first_name', 'last_name', 'email', 'password')
         extra_kwargs = {
             'first_name': {'required': True},
@@ -30,7 +28,7 @@ class RegisterCustomerSerializer(serializers.ModelSerializer):
         }
     
     def create(self, validated_data):
-        user = Customer.objects.create(
+        user = SvnUser.objects.create(
             uuid = uuid4(),
             email=validated_data['email'],
             first_name=validated_data['first_name'],
