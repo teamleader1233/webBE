@@ -1,10 +1,15 @@
 from django.urls import path, include
 
-from .views import register
+from .views import bill
+
+from rest_framework.routers import DefaultRouter
+
+router = DefaultRouter()
+router.register(r'^bill', bill.BillViewSet, basename='bill')
 
 
 urlpatterns = [
-    path('register', register.RegisterCustomerAPIView.as_view(), name='register'),
-    path('verify', register.VerifyEmailAPIView.as_view(), name='verifyEmail'),
-    path('login'),
+    
 ]
+    
+urlpatterns += router.urls
