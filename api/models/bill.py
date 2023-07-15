@@ -26,7 +26,7 @@ class Bill(models.Model):
     product = models.ForeignKey(Product, to_field='id', on_delete=models.CASCADE)
     quantity = models.IntegerField(max_length=3, default=1)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')
-    address = models.CharField(max_length=80)
+    address = models.CharField(max_length=100)
     payment = models.CharField(max_length=10, choices=PAYMENT_CHOICES, default='cod')
     updated_at = models.DateTimeField(auto_now=True)
 

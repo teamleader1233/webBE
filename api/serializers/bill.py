@@ -4,6 +4,7 @@ from ..models.bill import Bill, Product
 
 
 class BillSerializer(serializers.ModelSerializer):
+    id = serializers.UUIDField(read_only=True)
     product = serializers.PrimaryKeyRelatedField(queryset=Product.objects.all(), many=False)
     quantity = serializers.IntegerField(min_value=1, max_value=100, default=1)
     status = serializers.ChoiceField(choices=Bill.STATUS_CHOICES, default='pending')
@@ -12,7 +13,7 @@ class BillSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Bill
-        fields = ('product_id', 'quantity', 'status', 'address', 'payment')
+        fields = ('id', 'product', 'quantity', 'status', 'address', 'payment')
         extra_kwargs = {
             'updated_at': {'read_only': True},
         }
