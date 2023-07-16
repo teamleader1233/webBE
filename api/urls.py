@@ -5,8 +5,8 @@ from .views import bill, product
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
-router.register(r'^bills', bill.BillViewSet, basename='bill')
-router.register(r'^products', product.ProductViewSet, basename='product')
+router.register('bills', bill.BillViewSet, basename='bill')
+router.register('products', product.ProductViewSet, basename='product')
 
 urlpatterns = [
     
