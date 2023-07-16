@@ -1,11 +1,11 @@
 from rest_framework.viewsets import ModelViewSet
-from rest_framework.permissions import IsAdminUser
 
 from ..models.product import Product
 from ..serializers.product import ProductSerializer
+from ..utils.permission import IsAdminUserOrReadOnly
 
 
 class ProductViewSet(ModelViewSet):
     serializer_class = ProductSerializer
     queryset = Product.objects.all()
-    permission_classes = [IsAdminUser]
+    permission_classes = [IsAdminUserOrReadOnly]
