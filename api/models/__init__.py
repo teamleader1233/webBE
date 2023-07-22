@@ -1,2 +1,2 @@
-from api.models.user import SvnUser
-__all__ = ["SvnUser"]
+from api.models.user import User
+__all__ = ["User"]
