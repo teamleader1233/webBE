@@ -8,4 +8,6 @@ from ..utils.permission import IsAdminUserOrReadOnly
 class ProductViewSet(ModelViewSet):
     serializer_class = ProductSerializer
     queryset = Product.objects.all()
-    permission_classes = [IsAdminUserOrReadOnly]
+    #permission_classes = [IsAdminUserOrReadOnly]
+    search_fields = []
+    ordering_fields = ['name', 'price']

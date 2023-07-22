@@ -8,4 +8,6 @@ from ..utils.permission import IsAdminUserOrReadOnly
 class BillViewSet(ModelViewSet):
     serializer_class = BillSerializer
     queryset = Bill.objects.all()
-    permission_classes = [IsAdminUserOrReadOnly]
+    #permission_classes = [IsAdminUserOrReadOnly]
+    search_fields = ['product__id', 'status']
+    ordering_fields = ['quantity', 'date', 'total']
