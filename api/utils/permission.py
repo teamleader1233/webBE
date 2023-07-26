@@ -1,11 +1,8 @@
 from rest_framework.permissions import BasePermission
 
 
-class IsAdminUserOrReadOnly(BasePermission):
-    SAFE_METHODS = ['GET', 'HEAD', 'OPTIONS']
-
+class IsAdminUserOrRetrieveOnly(BasePermission):
     def has_permission(self, request, view):
-        if (request.method in self. SAFE_METHODS 
-            or request.user.is_staff):
-            return True
-        return False
+        if view.action != 'retrieve' and not request.user.is_staff:
+            return False
+        return True
