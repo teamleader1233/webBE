@@ -1,4 +1,4 @@
-from rest_framework.viewsets import ModelViewSet, ViewSet
+from rest_framework.viewsets import ModelViewSet
 
 from ..models.bill import Bill
 from ..serializers.bill import BillSerializer
