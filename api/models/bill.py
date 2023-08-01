@@ -20,10 +20,9 @@ class Bill(models.Model):
     product = models.ForeignKey(Product, to_field='id', on_delete=models.CASCADE)
     quantity = models.PositiveBigIntegerField(default=1)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')
-    address = BleachField(max_length=100)
     date = models.DateTimeField(auto_now=True)
     total = models.PositiveBigIntegerField()
     
-    def save(self, force_insert: bool = ..., force_update: bool = ..., using: str | None = ..., update_fields: Iterable[str] | None = ...) -> None:
+    def save(self, *args, **kwargs) -> None:
         self.total = self.product.price * self.quantity
-        return super(Bill, self).save(force_insert, force_update, using, update_fields)
+        return super(Bill, self).save(*args, **kwargs)
