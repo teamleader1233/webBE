@@ -16,10 +16,11 @@ STATUS_CHOICES = (
 
 
 class Bill(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
+    id = models.UUIDField(primary_key=True, default=uuid4, editable=False, db_index=True)
     product = models.ForeignKey(Product, to_field='id', on_delete=models.CASCADE)
     quantity = models.PositiveBigIntegerField(default=1)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')
+    location = BleachField(max_length=255, default='Chưa xác định')
     date = models.DateTimeField(auto_now=True)
     total = models.PositiveBigIntegerField()
     
