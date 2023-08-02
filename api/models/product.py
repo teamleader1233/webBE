@@ -3,8 +3,8 @@ from django_bleach.models import BleachField
 
 
 class Product(models.Model):
-    name = BleachField(max_length=100)
-    price = models.DecimalField(max_digits=12, decimal_places=2)
+    name = BleachField(max_length=64)
+    price = models.PositiveBigIntegerField(default=1)
     description = BleachField(max_length=512)
 
     def __str__(self):
