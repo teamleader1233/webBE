@@ -37,7 +37,7 @@ from api.views import (
 schema_view = get_schema_view(
    openapi.Info(
       title="SVN API",
-      default_version='v1',
+      default_version='v2',
       description="API for a small SVN project",
       terms_of_service="https://www.google.com/policies/terms/",
       contact=openapi.Contact(email="contact@snippets.local"),
