@@ -32,6 +32,7 @@ from api.views import (
     product,
     bill,
     blog,
+    user,
 )
 
 schema_view = get_schema_view(
@@ -52,6 +53,7 @@ router = DefaultRouter(trailing_slash=False)
 router.register('bills', bill.BillViewSet, basename='bill')
 router.register('products', product.ProductViewSet, basename='product')
 router.register('blogs', blog.BlogViewSet, basename='blog')
+router.register('verify', user.UserViewSet, basename='verify')
 
 
 urlpatterns = [
