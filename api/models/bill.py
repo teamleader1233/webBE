@@ -14,8 +14,12 @@ STATUS_CHOICES = (
 )
 
 
+def bill_token():
+    return token_urlsafe(8)
+
+
 class Bill(models.Model):
-    id = models.CharField(primary_key=True, default=token_urlsafe(8), editable=False, db_index=True, max_length=9)
+    id = models.CharField(primary_key=True, default=bill_token, editable=False, max_length=9)
     sender_name = BleachField(max_length=64)
     sender_phone = BleachField(max_length=16)
     sender_address = BleachField(max_length=256)
