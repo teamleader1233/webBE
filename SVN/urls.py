@@ -32,7 +32,7 @@ from api.views import (
     product,
     bill,
     blog,
-    user,
+    token,
 )
 
 schema_view = get_schema_view(
@@ -51,17 +51,15 @@ schema_view = get_schema_view(
 
 router = DefaultRouter(trailing_slash=False)
 router.register('bills', bill.BillViewSet, basename='bill')
-router.register('products', product.ProductViewSet, basename='product')
 router.register('blogs', blog.BlogViewSet, basename='blog')
-router.register('verify', user.UserViewSet, basename='verify')
 
 
 urlpatterns = [
     path('swagger<format>/', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
-    path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('token', token.TokenPairView.as_view(), name='token_obtain_pair'),
+    path('token/refresh', token.TokenRefreshView.as_view(), name='token_refresh'),
 ]
 
 urlpatterns += router.urls

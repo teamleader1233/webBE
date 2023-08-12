@@ -9,4 +9,3 @@ class BlogViewSet(ModelViewSet):
     serializer_class = BlogSerializer
     queryset = Blog.objects.all()
     permission_classes = [IsAdminUserOrReadOnly]
-    ordering_fields = ['-created_at', '-updated_at']

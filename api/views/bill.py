@@ -1,3 +1,4 @@
+from typing import Any
 from rest_framework.viewsets import ModelViewSet
 
 from ..models.bill import Bill
@@ -6,8 +7,6 @@ from ..utils.permission import IsAdminUserOrRetrieveOnly
 
 
 class BillViewSet(ModelViewSet):
+    permission_classes = [IsAdminUserOrRetrieveOnly]
     serializer_class = BillSerializer
     queryset = Bill.objects.all()
-    permission_classes = [IsAdminUserOrRetrieveOnly]
-    search_fields = ['product__id', 'status']
-    ordering_fields = ['quantity', 'date', 'total']
