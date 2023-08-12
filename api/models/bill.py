@@ -15,7 +15,7 @@ STATUS_CHOICES = (
 
 
 class Bill(models.Model):
-    id = models.UUIDField(primary_key=True, default=token_urlsafe(8), editable=False, db_index=True)
+    id = models.CharField(primary_key=True, default=token_urlsafe(8), editable=False, db_index=True, max_length=9)
     sender_name = BleachField(max_length=64)
     sender_phone = BleachField(max_length=16)
     sender_address = BleachField(max_length=256)
