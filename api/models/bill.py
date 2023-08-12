@@ -39,5 +39,5 @@ class Bill(models.Model):
         ordering = ['-date']
     
     def save(self, *args, **kwargs) -> None:
-        self.total = self.product.price * self.quantity
+        self.total = self.product_price * self.quantity
         return super(Bill, self).save(*args, **kwargs)
