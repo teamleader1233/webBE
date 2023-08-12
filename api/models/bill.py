@@ -1,5 +1,6 @@
 from typing import Iterable, Optional
 from uuid import uuid4
+from secrets import token_urlsafe
 
 from django.db import models
 from django_bleach.models import BleachField
@@ -14,7 +15,7 @@ STATUS_CHOICES = (
 
 
 class Bill(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid4, editable=False, db_index=True)
+    id = models.UUIDField(primary_key=True, default=token_urlsafe(8), editable=False, db_index=True)
     sender_name = BleachField(max_length=64)
     sender_phone = BleachField(max_length=16)
     sender_address = BleachField(max_length=256)
