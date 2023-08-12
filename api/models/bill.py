@@ -30,14 +30,15 @@ class Bill(models.Model):
     product_name = BleachField(max_length=64)
     product_price = models.PositiveBigIntegerField(default=1)
     product_weight = models.DecimalField(max_digits=5, decimal_places=2, default=0)
-    product_description = BleachField(max_length=512)
+    product_description = BleachField(max_length=512, default='')
     precollected_price = models.PositiveBigIntegerField(default=1)
-    location = BleachField(max_length=256)
+    delivery_address = BleachField(max_length=256)
+    current_location = BleachField(max_length=256, default='')
     quantity = models.PositiveBigIntegerField(default=1)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')
     date = models.DateTimeField(auto_now=True)
     note = BleachField(max_length=512, null=True, default=None)
-    total = models.PositiveBigIntegerField()
+    total_price = models.PositiveBigIntegerField()
 
     class Meta:
         ordering = ['-date']
