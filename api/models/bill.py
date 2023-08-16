@@ -15,11 +15,11 @@ STATUS_CHOICES = (
 
 
 def bill_token():
-    return token_urlsafe(8)
+    return token_urlsafe(7)
 
 
 class Bill(models.Model):
-    id = models.CharField(primary_key=True, default=bill_token, editable=False, max_length=9)
+    id = models.CharField(primary_key=True, default=bill_token, editable=False, max_length=10)
     sender_name = BleachField(max_length=64)
     sender_phone = BleachField(max_length=16)
     sender_address = BleachField(max_length=256)
@@ -37,12 +37,11 @@ class Bill(models.Model):
     quantity = models.PositiveBigIntegerField(default=1)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')
     date = models.DateTimeField(auto_now=True)
-    note = BleachField(max_length=512, null=True, default=None)
-    total_price = models.PositiveBigIntegerField()
+    note = BleachField(max_length=512, default='')
+    total_price = models.PositiveBigIntegerField(default=1)
 
     class Meta:
         ordering = ['-date']
     
     def save(self, *args, **kwargs) -> None:
-        self.total = self.product_price * self.quantity
         return super(Bill, self).save(*args, **kwargs)
