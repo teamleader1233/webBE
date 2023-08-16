@@ -24,17 +24,8 @@ class TokenSingleView(TokenObtainPairView):
         
         user = User.objects.get(username=request.data['username'])
         data = {
+            'access': serializer.validated_data['access'],
             'is_staff': user.is_staff,
         }
-
-        response = Response(data, status=status.HTTP_200_OK)
-        response.set_cookie(
-            key=settings.SIMPLE_JWT['AUTH_COOKIE'],
-            value=serializer.validated_data['access'],
-            expires=settings.SIMPLE_JWT['ACCESS_TOKEN_LIFETIME'],
-            path=settings.SIMPLE_JWT['AUTH_COOKIE_PATH'],
-            httponly=False,
-            secure=settings.SIMPLE_JWT['AUTH_COOKIE_SECURE'],
-            samesite=settings.SIMPLE_JWT['AUTH_COOKIE_SAMESITE'],
-        )
-        return response
+        
+        return Response(data, status=status.HTTP_200_OK)
