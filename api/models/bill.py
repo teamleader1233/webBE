@@ -50,4 +50,7 @@ class Bill(models.Model):
         ordering = ['-date']
     
     def save(self, *args, **kwargs) -> None:
+        self.delivery_option = 'nd'
+        if self.delivery_address.split('/')[-1] == 'Trung Quốc':
+            self.delivery_option == 'vt'
         return super(Bill, self).save(*args, **kwargs)
