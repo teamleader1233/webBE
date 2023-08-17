@@ -13,6 +13,11 @@ STATUS_CHOICES = (
     ('canceled', 'Đã hủy'),
 )
 
+DELIVERY_CHOICES = (
+    ('nd', 'Nội địa'),
+    ('vt', 'Việt-Trung'),
+)
+
 
 def bill_token():
     return token_urlsafe(7)
@@ -32,6 +37,7 @@ class Bill(models.Model):
     product_weight = models.DecimalField(max_digits=5, decimal_places=2, default=0)
     product_description = BleachField(max_length=512, default='')
     precollected_price = models.PositiveBigIntegerField(default=1)
+    delivery_option = models.CharField(max_length=2, choices=DELIVERY_CHOICES, null=True, default=None)
     delivery_address = BleachField(max_length=256)
     current_location = BleachField(max_length=256, default='')
     quantity = models.PositiveBigIntegerField(default=1)
